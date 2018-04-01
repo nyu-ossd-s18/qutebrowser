@@ -29,16 +29,32 @@ Added
 Changed
 ~~~~~~~
 
+- QtWebEngine: Support for JavaScript Shared Web Workers have been disabled on
+  Qt versions older than 5.11 because of security issues in in Chromium.
+  You can get the same effect in earlier versions via
+  `:set qt.args ['disable-shared-workers']`. An equivalent workaround is also
+  contained in Qt 5.9.5 and 5.10.1.
 - The file dialog for downloads now has basic tab completion based on the
   entered text.
 - `:version` now shows OS information for POSIX OS other than Linux/macOS.
 - When there's an error inserting the text from an external editor, a backup
   file is now saved.
+- The `window.hide_wayland_decoration` setting got renamed to
+  `window.hide_decoration` and now also works outside of wayland.
+- The `tabs.favicons.show` setting now can take three values: `'always'` (was
+  `True`), `'never'` (was `False`) and `'pinned'` (to only show favicons for
+  pinned tabs).
+- Hover tooltips on tabs now always show the webpage's title.
+- The default value for `content.host_blocking.lists` was changed to only
+  include https://github.com/StevenBlack/hosts[Steven Black's hosts-list] which
+  combines various sources.
+
 
 Fixed
 ~~~~~
 
 - Using hints before a page is fully loaded is now possible again.
+- Selecting hints with the number keypad now works again.
 - Tab titles for tabs loaded from sessions should now really be correct instead
   of showing the URL.
 - Loading URLs with customized settings from a session now avoids an additional
@@ -49,6 +65,13 @@ Fixed
 - QtWebEngine: Worked around issues with GreaseMonkey/stylesheets not being
   loaded correctly in some situations.
 - The statusbar now more closely reflects the caret mode state.
+- The icon on Windows should now be displayed in a higher resolution.
+- The QtWebEngine development tools (inspector) now also work when JavaScript is
+  disabled globally.
+- Building `.exe` files now works when `upx` is installed on the system.
+- The keyhint widget now shows the correct text for chained modifiers.
+- Loading GreaseMonkey scripts now also works with Jinja2 2.8 (e.g. on Debian
+  Stable).
 
 v1.2.1
 ------
