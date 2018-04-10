@@ -294,7 +294,7 @@ def qute_favicon(url):
     path = url.path()
     if path:
         path = "img" + os.sep.join(path.split('/'))
-        return 'image/png', utils.read_file(path, binary = False)
+        return 'image/png', utils.read_file(path, binary = True)
     else:
         raise QuteSchemeError("No file specified", ValueError())
 

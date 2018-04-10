@@ -6,6 +6,7 @@ vim: ft=html fileencoding=utf-8 sts=4 sw=4 et:
 <html>
     <head>
         <meta charset="utf-8">
+        
         <title>{{ title }}</title>
         <link rel="icon" sizes="128x128" href="qute://img/favicon.png">
         <style type="text/css">
@@ -20,6 +21,7 @@ vim: ft=html fileencoding=utf-8 sts=4 sw=4 et:
             {% block script %}
             {% endblock %}
         </script>
+        <link rel="shortcut icon" type ="image/png" href="qute://img/favicon.png" />
     </head>
     <body>
         {% block content %}
