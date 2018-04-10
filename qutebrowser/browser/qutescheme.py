@@ -284,6 +284,22 @@ def qute_javascript(url):
         raise QuteSchemeError("No file specified", ValueError())
 
 
+@add_handler('img')
+def qute_favicon(url):
+    """Handler for qute://img
+
+    Return content of file given as query parameter.
+    """
+
+    path = url.path()
+    if path:
+        path = "img" + os.sep.join(path.split('/'))
+        return 'image/png', utils.read_file(path, binary = False)
+    else:
+        raise QuteSchemeError("No file specified", ValueError())
+
+
+
 @add_handler('pyeval')
 def qute_pyeval(_url):
     """Handler for qute://pyeval."""
