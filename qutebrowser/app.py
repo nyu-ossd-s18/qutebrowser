@@ -384,6 +384,26 @@ def _open_special_pages(args):
                                background=False)
         general_sect['config-migration-shown'] = '1'
 
+def open_multiple_search(searches, searchTerm):
+    """Open multiple search queries in new windows + tabs
+
+    Args:
+        searches: list containing all of the search engines
+        searchTerm: the term we are searching up
+    """
+    # for search in searches:
+    #     if search == "google":
+    #         open_url("https://www.google.com/search?q=" + searchTerm)
+    #     if search == "duckduckgo":
+    #         open_url("https://duckduckgo.com/?q=" + searchTerm)
+
+    for search in searches:
+        try:
+            engine = config.val.url.searchengines[search]
+            open_url(engine, searchTerm)
+        except:
+            print("Search engine shortcut hasn't been defined in url.searchengines")
+
 
 def on_focus_changed(_old, new):
     """Register currently focused main window in the object registry."""

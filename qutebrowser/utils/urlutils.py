@@ -64,27 +64,39 @@ def _parse_search_term(s):
     Return:
         A (engine, term) tuple, where engine is None for the default engine.
     """
+    global engine, term
     s = s.strip()
-    split = s.split(maxsplit=1)
 
-    if len(split) == 2:
-        engine = split[0]
-        try:
-            config.val.url.searchengines[engine]
-        except KeyError:
+    if ',' in s:
+        split = s.split(',')
+
+        for engine in split:
+            try:
+                config.val.url.searchengines[engine]
+            except KeyError:
+                engine = None
+                term = s
+                raise ValueError("This engine couldn't be found.")
+
+    else:
+        split = s.split(maxsplit=1)
+        if len(split) == 2:
+            engine = split[0]
+            try:
+                config.val.url.searchengines[engine]
+            except KeyError:
+                engine = None
+                term = s
+            else:
+                term = split[1]
+        elif not split:
+            raise ValueError("Empty search term!")
+        else:
             engine = None
             term = s
-        else:
-            term = split[1]
-    elif not split:
-        raise ValueError("Empty search term!")
-    else:
-        engine = None
-        term = s
 
     log.url.debug("engine {}, term {!r}".format(engine, term))
     return (engine, term)
-
 
 def _get_search_url(txt):
     """Get a search engine URL for a text.
